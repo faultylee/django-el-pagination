@@ -312,7 +312,7 @@ class PaginateNode(template.Node):
             page = paginator.page(page_number)
         except EmptyPage:
             page = paginator.page(1)
-            if settings.PAGE_OUT_OF_RANGE_404:
+            if settings.PAGE_OUT_OF_RANGE_404 or context.request.is_ajax():
                 raise Http404('Page out of range')
 
         # Populate the context with required data.
